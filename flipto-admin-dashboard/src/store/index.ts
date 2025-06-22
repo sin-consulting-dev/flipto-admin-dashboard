@@ -26,6 +26,7 @@ interface DashboardStore {
   setWithdrawHistory: (history: WithdrawHistory[]) => void
   setLoading: (loading: boolean) => void
   toggleSidebar: () => void
+  addUser: (user: User) => void
 }
 
 export const useDashboardStore = create<DashboardStore>((set) => ({
@@ -45,4 +46,5 @@ export const useDashboardStore = create<DashboardStore>((set) => ({
   setWithdrawHistory: (history: WithdrawHistory[]) => set({ withdrawHistory: history }),
   setLoading: (loading) => set({ isLoading: loading }),
   toggleSidebar: () => set((state) => ({ isSidebarCollapsed: !state.isSidebarCollapsed })),
+  addUser: (user) => set((state) => ({ users: [user, ...state.users] })),
 }))

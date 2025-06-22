@@ -1,14 +1,27 @@
 import { useState, useMemo } from 'react'
 import { useDashboardStore } from '@/store'
 import { formatDateTime } from '@/lib/utils'
-import { Search, Filter, Eye, Edit, Trash2, Shield, Users as UsersIcon, Headphones, AlertTriangle } from 'lucide-react'
+import { Search, Filter, Eye, Edit, Trash2, Shield, Users as UsersIcon, Headphones, AlertTriangle, X } from 'lucide-react'
 
 export default function Users() {
-  const { users } = useDashboardStore()
+  const { users, addUser } = useDashboardStore()
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState('all')
   const [roleFilter, setRoleFilter] = useState('all')
   const [departmentFilter, setDepartmentFilter] = useState('all')
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const initialNewUserState = {
+    username: '',
+    email: '',
+    fullName: '',
+    role: 'cs_agent' as 'super_admin' | 'it_admin' | 'cs_agent' | 'risk_analyst',
+    status: 'pending' as 'active' | 'suspended' | 'blocked' | 'pending',
+    country: '',
+    department: 'Customer Support',
+  }
+
+  const [newUser, setNewUser] = useState(initialNewUserState)
 
   const filteredUsers = useMemo(() => {
     return users.filter(user => {
@@ -74,6 +87,44 @@ export default function Users() {
   // Collect unique departments for filter
   const departments = Array.from(new Set(users.map(u => u.department)))
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: value });
+  };
+
+  const handleAddNewUser = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    let permissions: string[] = [];
+    switch (newUser.role) {
+      case 'super_admin':
+        permissions = ['all'];
+        break;
+      case 'it_admin':
+        permissions = ['system_management', 'user_management', 'security'];
+        break;
+      case 'cs_agent':
+        permissions = ['player_support', 'transaction_view', 'basic_reports'];
+        break;
+      case 'risk_analyst':
+        permissions = ['risk_management', 'fraud_detection', 'player_management'];
+        break;
+    }
+
+    const userToAdd = {
+      id: `${Date.now()}`,
+      ...newUser,
+      permissions,
+      lastLogin: new Date(),
+      registrationDate: new Date(),
+      isActive: newUser.status === 'active',
+    };
+
+    addUser(userToAdd);
+    setIsModalOpen(false);
+    setNewUser(initialNewUserState);
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -81,7 +132,10 @@ export default function Users() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Admin User Management</h1>
           <p className="text-gray-600 dark:text-gray-400">Manage internal admin users and their permissions</p>
         </div>
-        <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+        >
           Add New Admin User
         </button>
       </div>
@@ -224,6 +278,88 @@ export default function Users() {
           </table>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4">
+          <div className="bg-white dark:bg-slate-900 rounded-lg shadow-2xl w-full max-w-2xl transform transition-all max-h-[90vh] overflow-y-auto">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-slate-900 z-10">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Add New Admin User</h2>
+                <button onClick={() => setIsModalOpen(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+            <form onSubmit={handleAddNewUser}>
+              <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/* Full Name */}
+                <div className="md:col-span-2">
+                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+                  <input type="text" name="fullName" id="fullName" value={newUser.fullName} onChange={handleInputChange} required className="w-full pl-4 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-200"/>
+                </div>
+
+                {/* Username */}
+                <div>
+                  <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Username</label>
+                  <input type="text" name="username" id="username" value={newUser.username} onChange={handleInputChange} required className="w-full pl-4 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-200"/>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
+                  <input type="email" name="email" id="email" value={newUser.email} onChange={handleInputChange} required className="w-full pl-4 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-200"/>
+                </div>
+
+                {/* Role */}
+                <div>
+                  <label htmlFor="role" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
+                  <select name="role" id="role" value={newUser.role} onChange={handleInputChange} className="w-full pl-4 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-200">
+                    <option value="cs_agent">CS Agent</option>
+                    <option value="it_admin">IT Admin</option>
+                    <option value="risk_analyst">Risk Analyst</option>
+                    <option value="super_admin">Super Admin</option>
+                  </select>
+                </div>
+
+                {/* Department */}
+                <div>
+                  <label htmlFor="department" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Department</label>
+                  <input type="text" name="department" id="department" value={newUser.department} onChange={handleInputChange} required className="w-full pl-4 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-200"/>
+                </div>
+
+                {/* Country */}
+                <div>
+                  <label htmlFor="country" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Country</label>
+                  <input type="text" name="country" id="country" value={newUser.country} onChange={handleInputChange} required className="w-full pl-4 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-200"/>
+                </div>
+
+                {/* Status */}
+                <div>
+                  <label htmlFor="status" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
+                  <select name="status" id="status" value={newUser.status} onChange={handleInputChange} className="w-full pl-4 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-200">
+                    <option value="pending">Pending</option>
+                    <option value="active">Active</option>
+                    <option value="suspended">Suspended</option>
+                    <option value="blocked">Blocked</option>
+                  </select>
+                </div>
+
+              </div>
+              <div className="p-6 border-t border-gray-200 dark:border-gray-700 sticky bottom-0 bg-white dark:bg-slate-900 z-10">
+                <div className="flex justify-end space-x-4">
+                  <button type="button" onClick={() => setIsModalOpen(false)} className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700">
+                    Cancel
+                  </button>
+                  <button type="submit" className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                    Add Admin User
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   )
 } 
