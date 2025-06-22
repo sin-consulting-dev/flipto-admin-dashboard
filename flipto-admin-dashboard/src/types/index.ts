@@ -3,6 +3,21 @@ export interface User {
   username: string
   email: string
   fullName: string
+  role: 'super_admin' | 'it_admin' | 'cs_agent' | 'risk_analyst'
+  status: 'active' | 'suspended' | 'pending' | 'blocked'
+  permissions: string[]
+  lastLogin: Date
+  registrationDate: Date
+  country: string
+  department: string
+  isActive: boolean
+}
+
+export interface Player {
+  id: string
+  username: string
+  email: string
+  fullName: string
   status: 'active' | 'suspended' | 'pending' | 'blocked'
   kycStatus: 'verified' | 'pending' | 'rejected' | 'not_submitted'
   balance: number

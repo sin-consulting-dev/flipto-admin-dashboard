@@ -1,5 +1,13 @@
 import { create } from 'zustand'
 import { User, Game, Transaction, SecurityAlert, BettingHistory, WithdrawHistory } from '@/types'
+import { 
+  mockUsers, 
+  mockGames, 
+  mockTransactions, 
+  mockSecurityAlerts, 
+  mockBettingHistory, 
+  mockWithdrawHistory 
+} from '@/data/mockData'
 
 interface DashboardStore {
   users: User[]
@@ -21,12 +29,12 @@ interface DashboardStore {
 }
 
 export const useDashboardStore = create<DashboardStore>((set) => ({
-  users: [],
-  games: [],
-  transactions: [],
-  securityAlerts: [],
-  bettingHistory: [],
-  withdrawHistory: [],
+  users: mockUsers,
+  games: mockGames,
+  transactions: mockTransactions,
+  securityAlerts: mockSecurityAlerts,
+  bettingHistory: mockBettingHistory,
+  withdrawHistory: mockWithdrawHistory,
   isLoading: false,
   isSidebarCollapsed: false,
   setUsers: (users) => set({ users }),
