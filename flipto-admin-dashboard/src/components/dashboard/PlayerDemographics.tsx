@@ -1,6 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useDashboardStore } from '@/store';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Player } from '@/types';
 
 const PlayerDemographics = () => {
@@ -18,11 +17,11 @@ const PlayerDemographics = () => {
   }, [] as { country: string; users: number }[]).sort((a: { country: string; users: number }, b: { country: string; users: number }) => b.users - a.users);
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Player Demographics by Country</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
+      <div className="mb-4">
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Player Demographics by Country</h3>
+      </div>
+      <div>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -33,8 +32,8 @@ const PlayerDemographics = () => {
             <Bar dataKey="users" fill="#3B82F6" name="Number of Players" />
           </BarChart>
         </ResponsiveContainer>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

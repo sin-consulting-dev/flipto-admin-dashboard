@@ -1,6 +1,5 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useDashboardStore } from '@/store';
-import { Card, CardContent, CardHeader, CardTitle } from '../ui/Card';
 import { Game } from '@/types';
 
 const GamePopularity = () => {
@@ -11,11 +10,11 @@ const GamePopularity = () => {
     .slice(0, 10);
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Top 10 Most Popular Games by Plays</CardTitle>
-      </CardHeader>
-      <CardContent>
+    <div className="bg-white dark:bg-slate-800 rounded-lg shadow p-6">
+      <div className="mb-4">
+        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Top 10 Most Popular Games by Plays</h3>
+      </div>
+      <div>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={sortedGames} layout="vertical" margin={{ top: 5, right: 20, left: 50, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -26,8 +25,8 @@ const GamePopularity = () => {
             <Bar dataKey="totalPlays" fill="#8884d8" name="Total Plays" />
           </BarChart>
         </ResponsiveContainer>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 };
 

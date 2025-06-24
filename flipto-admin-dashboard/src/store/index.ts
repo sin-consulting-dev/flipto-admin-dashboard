@@ -1,7 +1,8 @@
 import { create } from 'zustand'
-import { User, Game, Transaction, SecurityAlert, BettingHistory, WithdrawHistory } from '@/types'
+import { User, Player, Game, Transaction, SecurityAlert, BettingHistory, WithdrawHistory } from '@/types'
 import { 
   mockUsers, 
+  mockPlayers,
   mockGames, 
   mockTransactions, 
   mockSecurityAlerts, 
@@ -11,6 +12,7 @@ import {
 
 interface DashboardStore {
   users: User[]
+  players: Player[]
   games: Game[]
   transactions: Transaction[]
   securityAlerts: SecurityAlert[]
@@ -19,6 +21,7 @@ interface DashboardStore {
   isLoading: boolean
   isSidebarCollapsed: boolean
   setUsers: (users: User[]) => void
+  setPlayers: (players: Player[]) => void
   setGames: (games: Game[]) => void
   setTransactions: (transactions: Transaction[]) => void
   setSecurityAlerts: (alerts: SecurityAlert[]) => void
@@ -30,6 +33,7 @@ interface DashboardStore {
 
 export const useDashboardStore = create<DashboardStore>((set) => ({
   users: mockUsers,
+  players: mockPlayers,
   games: mockGames,
   transactions: mockTransactions,
   securityAlerts: mockSecurityAlerts,
@@ -38,6 +42,7 @@ export const useDashboardStore = create<DashboardStore>((set) => ({
   isLoading: false,
   isSidebarCollapsed: false,
   setUsers: (users) => set({ users }),
+  setPlayers: (players) => set({ players }),
   setGames: (games) => set({ games }),
   setTransactions: (transactions) => set({ transactions }),
   setSecurityAlerts: (alerts) => set({ securityAlerts: alerts }),
