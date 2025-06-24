@@ -707,6 +707,7 @@ export const mockSecurityAlerts: SecurityAlert[] = [
 export const mockBettingHistory: BettingHistory[] = [
   {
     id: '1',
+    transactionId: 'BET-2024-001',
     username: 'john_doe',
     gameName: 'Starburst',
     gameType: 'Slots',
@@ -720,6 +721,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '2',
+    transactionId: 'BET-2024-002',
     username: 'jane_smith',
     gameName: 'Blackjack Pro',
     gameType: 'Table',
@@ -733,6 +735,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '3',
+    transactionId: 'BET-2024-003',
     username: 'sarah_jones',
     gameName: 'Gonzo\'s Quest',
     gameType: 'Slots',
@@ -746,6 +749,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '4',
+    transactionId: 'BET-2024-004',
     username: 'alex_garcia',
     gameName: 'Live Roulette',
     gameType: 'Live',
@@ -759,6 +763,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '5',
+    transactionId: 'BET-2024-005',
     username: 'lisa_white',
     gameName: 'Book of Dead',
     gameType: 'Slots',
@@ -772,6 +777,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '6',
+    transactionId: 'BET-2024-006',
     username: 'anna_kim',
     gameName: 'Poker Texas Hold\'em',
     gameType: 'Table',
@@ -785,6 +791,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '7',
+    transactionId: 'BET-2024-007',
     username: 'john_doe',
     gameName: 'Wolf Gold',
     gameType: 'Slots',
@@ -798,6 +805,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '8',
+    transactionId: 'BET-2024-008',
     username: 'sarah_jones',
     gameName: 'Baccarat Live',
     gameType: 'Live',
@@ -811,6 +819,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '9',
+    transactionId: 'BET-2024-009',
     username: 'emma_davis',
     gameName: 'Mega Millions',
     gameType: 'Slots',
@@ -824,6 +833,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '10',
+    transactionId: 'BET-2024-010',
     username: 'alex_garcia',
     gameName: 'Football Betting',
     gameType: 'Table',
@@ -837,6 +847,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '11',
+    transactionId: 'BET-2024-011',
     username: 'lisa_white',
     gameName: 'Starburst',
     gameType: 'Slots',
@@ -850,6 +861,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '12',
+    transactionId: 'BET-2024-012',
     username: 'anna_kim',
     gameName: 'Gonzo\'s Quest',
     gameType: 'Slots',
@@ -863,6 +875,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '13',
+    transactionId: 'BET-2024-013',
     username: 'john_doe',
     gameName: 'Blackjack Pro',
     gameType: 'Table',
@@ -876,6 +889,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '14',
+    transactionId: 'BET-2024-014',
     username: 'jane_smith',
     gameName: 'Live Roulette',
     gameType: 'Live',
@@ -889,6 +903,7 @@ export const mockBettingHistory: BettingHistory[] = [
   },
   {
     id: '15',
+    transactionId: 'BET-2024-015',
     username: 'sarah_jones',
     gameName: 'Book of Dead',
     gameType: 'Slots',

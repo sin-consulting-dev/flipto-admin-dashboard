@@ -3,6 +3,8 @@ import { RecentActivity } from '@/components/dashboard/RecentActivity'
 import { TopGames } from '@/components/dashboard/TopGames'
 import { SecurityAlerts } from '@/components/dashboard/SecurityAlerts'
 import RevenueChart from '@/components/dashboard/RevenueChart'
+import PlayerDemographics from '@/components/dashboard/PlayerDemographics'
+import GamePopularity from '@/components/dashboard/GamePopularity'
 import { mockAnalyticsData } from '@/data/mockData'
 
 export default function Dashboard() {
@@ -18,6 +20,11 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <RevenueChart />
         <TopGames />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <PlayerDemographics />
+        <GamePopularity />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

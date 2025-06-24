@@ -9,7 +9,7 @@ import {
   Monitor,
   UserCheck,
   CreditCard,
-  ChevronLeft,
+  Menu,
 } from 'lucide-react'
 import { useDashboardStore } from '@/store';
 
@@ -27,14 +27,38 @@ export default function Sidebar() {
   const { isSidebarCollapsed, toggleSidebar } = useDashboardStore();
 
   return (
-    <div className={`hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col transition-all duration-300 ${isSidebarCollapsed ? 'lg:w-20' : 'lg:w-72'}`}>
-      <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-800 px-6 pb-4 border-r border-gray-200 dark:border-gray-700">
+    <div
+      className={`hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col transition-all duration-300 ${
+        isSidebarCollapsed ? 'lg:w-20' : 'lg:w-72'
+      }`}
+    >
+      <div
+        className={`flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-800 pb-4 border-r border-gray-200 dark:border-gray-700 ${
+          isSidebarCollapsed ? 'px-4' : 'px-6'
+        }`}
+      >
         <div className="flex h-16 shrink-0 items-center">
-          <div className="flex items-center space-x-2">
-            <div className={`w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center`}>
-              <BarChart3 className="w-5 h-5 text-white" />
-            </div>
-            {!isSidebarCollapsed && <span className="text-xl font-bold text-gray-900 dark:text-white">Flipto Admin</span>}
+          <div className="flex w-full items-center">
+            {!isSidebarCollapsed && (
+              <div className="flex items-center space-x-2">
+                <div
+                  className={`w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center`}
+                >
+                  <BarChart3 className="w-5 h-5 text-white" />
+                </div>
+                <span className="text-xl font-bold text-gray-900 dark:text-white">
+                  Flipto Admin
+                </span>
+              </div>
+            )}
+            <button
+              onClick={toggleSidebar}
+              className={`rounded-md p-1 text-gray-700 hover:text-blue-600 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700 ${
+                isSidebarCollapsed ? 'mx-auto' : 'ml-auto'
+              }`}
+            >
+              <Menu className="h-6 w-6" />
+            </button>
           </div>
         </div>
         <nav className="flex flex-1 flex-col">
@@ -59,11 +83,6 @@ export default function Sidebar() {
                   </li>
                 ))}
               </ul>
-            </li>
-            <li className="mt-auto -mx-6">
-              <button onClick={toggleSidebar} className="flex items-center justify-center w-full py-4 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700">
-                <ChevronLeft className={`w-6 h-6 transition-transform duration-300 ${isSidebarCollapsed ? 'rotate-180' : ''}`} />
-              </button>
             </li>
           </ul>
         </nav>

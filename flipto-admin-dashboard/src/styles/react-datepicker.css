@@ -1,0 +1,66 @@
+/* react-datepicker.css */
+.react-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.react-datepicker__input-container input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db; /* gray-300 */
+  border-radius: 0.5rem; /* rounded-lg */
+  background-color: #ffffff; /* bg-white */
+  color: #111827; /* text-gray-900 */
+}
+
+html.dark .react-datepicker__input-container input {
+  border-color: #4b5563; /* dark:border-gray-600 */
+  background-color: #374151; /* dark:bg-slate-700 */
+  color: #f3f4f6; /* dark:text-gray-200 */
+}
+
+.react-datepicker__input-container input:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-color: rgba(59, 130, 246, 1); /* focus:ring-blue-500 */
+  border-color: transparent; /* focus:border-transparent */
+}
+
+.react-datepicker-popper {
+  z-index: 50 !important;
+}
+
+.react-datepicker {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-size: 0.8rem;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #aeaeae;
+  border-radius: 0.3rem;
+  display: inline-block;
+  position: relative;
+}
+
+html.dark .react-datepicker {
+  background-color: #1f2937; /* dark:bg-gray-800 */
+  color: #d1d5db; /* dark:text-gray-300 */
+  border: 1px solid #4b5563; /* dark:border-gray-600 */
+}
+
+.react-datepicker__header {
+  text-align: center;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #aeaeae;
+  border-top-left-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  padding-top: 8px;
+  position: relative;
+}
+
+html.dark .react-datepicker__header {
+  background-color: #374151; /* dark:bg-gray-700 */
+  border-bottom: 1px solid #4b5563; /* dark:border-gray-600 */
+} 
